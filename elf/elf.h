@@ -74,4 +74,40 @@ typedef enum {
   OSDEV_ELF_ISA_AARCH64 = 0xb7,
 } osdev_elf_isa_t;
 
+typedef struct {
+  uint32_t segment_type;
+  uint32_t p_offset;
+  uint32_t p_vaddr;
+  uint32_t undefined;
+  uint32_t p_filesz;
+  uint32_t p_memsz;
+  uint32_t flags;
+  uint32_t alignment;
+} osdev_elf_program_header32_t;
+
+typedef struct {
+  uint32_t segment;
+  uint32_t flags;
+  uint64_t p_offset;
+  uint64_t p_vaddr;
+  uint32_t undefined;
+  uint64_t p_filesz;
+  uint64_t p_memsz;
+  uint64_t alignment;
+} osdev_elf_program_header64_t;
+
+typedef enum {
+  OSDEV_ELF_SEGMENT_NULL = 0,
+  OSDEV_ELF_SEGMENT_LOAD = 1,
+  OSDEV_ELF_SEGMENT_DYNAMIC = 2,
+  OSDEV_ELF_SEGMENT_INTERP = 3,
+  OSDEV_ELF_SEGMENT_NOTE = 4,
+} osdev_elf_segment_type_t;
+
+typedef enum {
+  OSDEV_ELF_PROGRAM_HEADER_FLAG_EXECUTABLE = 1,
+  OSDEV_ELF_PROGRAM_HEADER_FLAG_WRITABLE = 2,
+  OSDEV_ELF_PROGRAM_HEADER_FLAG_READABLE = 4,
+} osdev_elf_program_header_flag_t;
+
 #endif
