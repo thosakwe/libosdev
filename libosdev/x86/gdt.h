@@ -11,7 +11,10 @@
  * back into this structure.
  */
 typedef struct {
-
+  uint32_t base;
+  uint32_t limit;
+  uint8_t flags;
+  uint8_t access;
 } osdev_gdt_segment_t;
 
 typedef struct {
