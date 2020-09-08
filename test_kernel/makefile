@@ -1,5 +1,7 @@
+export AR := i686-elf-ar
 export AS := i686-elf-as
 export CC := i686-elf-gcc
+export NM := i686-elf-nm
 export CFLAGS += -g
 
 OSDEV_BOOTSTRAP = ../bootstrap/libosdev_bootstrap.bin
@@ -22,7 +24,10 @@ $(ISO): $(OSDEV_BOOTSTRAP)
 $(OSDEV_BOOTSTRAP):
 	$(MAKE) -C ../bootstrap
 
-bochs: $(ISO)
+test_kernel.sym: $(OSDEV_BOOTSTRAP)
+	$(NM) -C $< > $@
+
+bochs: $(ISO) test_kernel.sym
 	bochs -q -rc debug.rc
 
 qemu: $(ISO)

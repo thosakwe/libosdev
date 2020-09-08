@@ -1,26 +1,22 @@
 .global osdev_gdt_load
 
-.section .data
-msg:
-.ascii "What the fuck?\n"
-
-.section .code
+.section .text
 .code32
 
-# (void* gdt, uint16 segment)
+# (void* gdt, uint32 code_seg, uint32 data_seg)
 osdev_gdt_load:
-  ret
-	mov 4(%esp), %eax
-	mov 8(%esp), %ebx
+  xchgw %bx, %bx
+  mov 4(%esp), %eax # void * gdt
+  mov 8(%esp), %ecx # uint32 data_seg
   xchgw %bx, %bx
 	lgdt (%eax)
-	mov $0x10, %ax
-	mov %ax, %ds
-	mov %ax, %es
-	mov %ax, %fs
-	mov %ax, %gs
-	mov %ax, %ss
-  mov %bx, %cs
-	ljmp *osdev_gdt_load_done
+  # No longer need to overwrite ax
+	# mov $0x10, %ax
+	mov %cx, %ds
+	mov %cx, %es
+	mov %cx, %fs
+	mov %cx, %gs
+	mov %cx, %ss
+	ljmp $0x08, $osdev_gdt_load_done
 osdev_gdt_load_done:
 	ret

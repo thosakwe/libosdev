@@ -1,5 +1,4 @@
-objects = x86/gdt.o x86/gdt_asm.o \
-					../third_party/printf/printf.o
+objects = x86/gdt.o x86/gdt_asm.o
 
 libosdev.a: $(objects)
 	$(AR) rcs $@ $(objects)

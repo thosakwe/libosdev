@@ -22,6 +22,8 @@ multiboot_end:
 .align 16
 stack_bottom:
 .skip 16384
+.skip 16384
+.skip 16384
 stack_top:
  
 # Entry

@@ -23,7 +23,8 @@ void osdev_bootstrap_main(unsigned long magic, unsigned long addr) {
   osdev_gdt_set_entry(&gdt[2], 0, LIMIT_4GB, 0x92, 0xcf);
   gdtr.offset = (uint32_t)&gdt;
   gdtr.size = (sizeof(gdt) - 1);
-  osdev_gdt_load((uint32_t)&gdtr, 0x08);
+
+  osdev_gdt_load((uint32_t)&gdtr, 0x10);
 
   printf("Setting up initial IDT.\n");
 

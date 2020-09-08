@@ -1,4 +1,5 @@
-export CFLAGS += -ffreestanding -O2
+export ASFLAGS = $(CFLAGS)
+export CFLAGS += -ffreestanding
 export LDFLAGS += -nostdlib
 LIBOSDEV = ../libosdev/libosdev.a
 
@@ -12,7 +13,7 @@ target = libosdev_bootstrap.bin
 .PHONY: $(LIBOSDEV)
 
 $(target): $(objects) $(libs) linker.ld
-	$(CC) $(CFLAGS) -o $@ $(objects) $(libs) $(LDLIBS) $(LDFLAGS) -lgcc -T linker.ld
+	$(CC) $(CFLAGS) -T linker.ld -o $@ $(objects) $(libs) $(LDLIBS) $(LDFLAGS) -lgcc
 	grub-file --is-x86-multiboot2 $@
 
 $(LIBOSDEV):

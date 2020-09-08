@@ -26,8 +26,8 @@ void osdev_gdt_set_entry(osdev_gdt_entry_t *entry, uint32_t base, uint32_t limit
                          uint8_t access, uint8_t flags);
 
 /**
- * Loads a 32-bit GDTR structure, and then jumps to the provided segment.
+ * Loads a 32-bit GDTR structure, and then jumps to segment 0x08, with the given data segment.
  */
-void osdev_gdt_load(uint32_t gdtr_ptr, uint16_t jump_to_segment);
+void osdev_gdt_load(uint32_t gdtr_ptr, uint32_t data_seg);
 
 #endif
