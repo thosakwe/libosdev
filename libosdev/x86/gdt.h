@@ -20,31 +20,39 @@ typedef struct {
 typedef struct {
   uint16_t size;
   uint32_t offset;
-} osdev_gdtr32_t;
+} __attribute__((packed)) osdev_gdtr32_t;
 
 typedef struct {
   uint16_t size;
   uint64_t offset;
-} osdev_gdtr64_t;
+} __attribute__((packed)) osdev_gdtr64_t;
+
+/**
+ * The actual x86 GDT structure.
+ */
+typedef struct {
+  uint16_t limit_0_15;
+  uint16_t base_0_15;
+  uint8_t base_16_23;
+  uint8_t access;
+  uint8_t limit_16_19_and_flags;
+  uint8_t base_24_31;
+} __attribute__((packed)) gdt_entry_t;
 
 /**
  * Converts a GDT segment structure into an 8-byte GDT entry.
  */
-uint64_t osdev_gdt_segment_to_long(osdev_gdt_segment_t* segment);
+uint64_t osdev_gdt_segment_to_long(osdev_gdt_segment_t *segment);
 
 /**
- * Converts an 8-byte GDT entry into a GDT segment structure.
+ * Sets the values of a GDT entry.
  */
-void osdev_gdt_long_to_segment(uint64_t entry, osdev_gdt_segment_t *segment);
+void osdev_gdt_set_entry(gdt_entry_t *entry, uint32_t base, uint32_t limit,
+                         uint8_t access, uint8_t flags);
 
 /**
  * Loads a 32-bit GDTR structure, and then jumps to the provided segment.
  */
-void osdev_gdt_load32(osdev_gdtr32_t* gdt,  uint16_t jump_to_segment);
-
-/**
- * Loads a 64-bit GDTR structure, and then jumps to the provided segment.
- */
-void osdev_gdt_load64(osdev_gdtr64_t* gdt,  uint16_t jump_to_segment);
+extern void osdev_gdt_load32(osdev_gdtr32_t *gdt, uint16_t jump_to_segment);
 
 #endif
