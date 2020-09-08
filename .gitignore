@@ -3,3 +3,5 @@
 third_party
 *.bin
 *.iso
+*.sym
+*.ini
