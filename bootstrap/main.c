@@ -5,7 +5,7 @@
 void _putchar(char ch) { osdev_outb(COM1, ch); }
 
 void osdev_bootstrap_main(unsigned long magic, unsigned long addr) {
-  if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {
+  if (magic != MULTIBOOT2_BOOTLOADER_MAGIC) {
     // TODO: Log improper magic
     printf("Invalid magic.\n");
     return;
