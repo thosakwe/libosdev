@@ -17,17 +17,17 @@ typedef struct {
   uint8_t access;
   uint8_t limit_16_19_and_flags;
   uint8_t base_24_31;
-} __attribute__((packed)) gdt_entry_t;
+} __attribute__((packed)) osdev_gdt_entry_t;
 
 /**
  * Sets the values of a GDT entry.
  */
-void osdev_gdt_set_entry(gdt_entry_t *entry, uint32_t base, uint32_t limit,
+void osdev_gdt_set_entry(osdev_gdt_entry_t *entry, uint32_t base, uint32_t limit,
                          uint8_t access, uint8_t flags);
 
 /**
  * Loads a 32-bit GDTR structure, and then jumps to the provided segment.
  */
-extern void osdev_gdt_load(uint32_t gdtr_ptr, uint16_t jump_to_segment);
+void osdev_gdt_load(uint32_t gdtr_ptr, uint16_t jump_to_segment);
 
 #endif

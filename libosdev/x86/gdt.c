@@ -1,6 +1,6 @@
 #include "gdt.h"
 
-void osdev_gdt_set_entry(gdt_entry_t *entry, uint32_t base, uint32_t limit,
+void osdev_gdt_set_entry(osdev_gdt_entry_t *entry, uint32_t base, uint32_t limit,
                          uint8_t access, uint8_t flags) {
   entry->base_0_15 = base & 0xffff;
   entry->base_16_23 = (base >> 16) & 0xff;
