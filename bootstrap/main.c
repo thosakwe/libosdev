@@ -1,5 +1,10 @@
-#include "../elf/elf.h"
-#include "../multiboot2.h"
+#include "../libosdev/libosdev.h"
+#include "../third_party/printf/printf.h"
+#define COM1 0x3f8
+
+void _putchar(char ch) {
+  osdev_outb(COM1, ch);
+}
 
 void osdev_bootstrap_main(unsigned long magic, unsigned long addr) {
   if (magic != MULTIBOOT_BOOTLOADER_MAGIC) {

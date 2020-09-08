@@ -1,0 +1,10 @@
+#/usr/bin/env bash
+# vi: ft=bash
+
+cd "$(dirname $(dirname "$0") )"
+mkdir -p third_party
+cd third_party
+
+if [ ! -d printf ]; then
+  git clone https://github.com/mpaland/printf
+fi
